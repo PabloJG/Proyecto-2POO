@@ -1,3 +1,3 @@
-public class Personaje {
-    
+
+public class Personaje  {
 }
