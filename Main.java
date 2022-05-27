@@ -1,6 +1,6 @@
-import View.*;
-import Model.*;
-import Controller.*;
+import Model.Factory;
+import View.Personaje;
+import View.View;
 
 public class Main {
     public static void main(String[] args) throws Exception {
