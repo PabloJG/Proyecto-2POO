@@ -79,8 +79,8 @@ public class Personaje{
     }
 
     public void disparo(){
-        System.out.println(posicion);
-        System.out.println("X" + X + "Y" + Y);
+        //System.out.println(posicion);
+        //System.out.println("X" + X + "Y" + Y);
         if(posicion.equals("arriba")){
             if (View.bMatriz[X-1][Y].getBackground() == Color.yellow)
                 View.bMatriz[X-1][Y].setBackground(Color.gray);
