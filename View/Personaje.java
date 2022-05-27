@@ -8,6 +8,8 @@ public class Personaje{
     int X;
     int Y;
     int vida;
+    int cantmov;
+    String posicion;
 
     public Personaje(){
         X = 17;
@@ -39,22 +41,34 @@ public class Personaje{
                     actualizar();
                     Y++;
                     colorear();
+                    posicion = "derecha";
+                    Enemigo.cargarnuevo(X, Y);
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     actualizar();
                     Y--;
                     colorear();
+                    posicion = "izquierda";
+                    Enemigo.cargarnuevo(X, Y);
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_UP) {
                     actualizar();
                     X--;
                     colorear();
+                    posicion = "arriba";
+                    Enemigo.cargarnuevo(X, Y);
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     actualizar();
                     X++;
                     colorear();
+                    posicion = "abajo";
+                    Enemigo.cargarnuevo(X, Y);
                 }
+                else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    disparo();
+                }
+                cantmov++;
             }
   
             @Override
@@ -62,5 +76,26 @@ public class Personaje{
             }
         
         });
+    }
+
+    public void disparo(){
+        System.out.println(posicion);
+        System.out.println("X" + X + "Y" + Y);
+        if(posicion.equals("arriba")){
+            if (View.bMatriz[X-1][Y].getBackground() == Color.yellow)
+                View.bMatriz[X-1][Y].setBackground(Color.gray);
+        }
+        if(posicion.equals("abajo")){
+            if (View.bMatriz[X+1][Y].getBackground() == Color.yellow)
+                View.bMatriz[X+1][Y].setBackground(Color.gray);
+        }
+        if(posicion.equals("izquierda")){
+            if (View.bMatriz[X][Y-1].getBackground() == Color.yellow)
+                View.bMatriz[X][Y-1].setBackground(Color.gray);
+        }
+        if(posicion.equals("derecha")){
+            if (View.bMatriz[X][Y+1].getBackground() == Color.yellow)
+                View.bMatriz[X][Y+1].setBackground(Color.gray);
+        }
     }
 }
