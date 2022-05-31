@@ -24,7 +24,6 @@ public class Enemigo {
     }
 
     private static void actualizar(int i){
-        System.out.println(Factory.enemigos.get(i).coord[0] +" "+Factory.enemigos.get(i).coord[1]);
         View.bMatriz[Factory.enemigos.get(i).coord[0]][Factory.enemigos.get(i).coord[1]].setBackground(Color.gray);
     }
 
@@ -66,5 +65,17 @@ public class Enemigo {
                 View.bMatriz[fila][columna].setBackground(Color.gray);
             }
         }
+    }
+
+    public static boolean vidaPersonaje(int fila, int columna){
+        for(int i = 0; i < cantidadE; i++){
+            if((Factory.enemigos.get(i).coord[0] == fila) && (Factory.enemigos.get(i).coord[1] == columna)){
+                eliminar(fila, columna);
+                View.bMatriz[fila][columna].setBackground(Color.red);
+                Personaje.vida--;
+                return true;
+            }
+        }
+        return false;
     }
 }
