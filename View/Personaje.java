@@ -1,5 +1,5 @@
 package View;
-import javax.swing.JButton;
+import javax.swing.*;
 
 import Model.Factory;
 
@@ -10,7 +10,7 @@ public class Personaje{
     JButton Personaje;
     int X;
     int Y;
-    int vida;
+    static int vida;
     int cantmov;
     int[] coord;
     String posicion;
@@ -85,6 +85,7 @@ public class Personaje{
                 }
                 if(Enemigo.agregarnuevo(cantmov) == true)
                     cantmov = 0;
+                actualizarVida();
             }
   
             @Override
@@ -92,6 +93,17 @@ public class Personaje{
             }
         
         });
+    }
+
+    public void actualizarVida(){
+        if(vida == 0){
+            JOptionPane.showMessageDialog(null, "Haz perdido, no tienes mas vidas","Fin",JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
+        }
+        else{
+            if(Enemigo.vidaPersonaje(X, Y) == true)
+                JOptionPane.showMessageDialog(null, "Haz perdido una vida, te quedan " + vida + " vidas","Cuidado",JOptionPane.WARNING_MESSAGE);
+        }
     }
 
     public void disparo(){
