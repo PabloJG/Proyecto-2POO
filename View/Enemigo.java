@@ -6,27 +6,36 @@ public class Enemigo {
     int fila;
     int columna;
     static int cantidadE;
+    static int coordmov;
+    int[] coord;
 
     public Enemigo(){
         fila = (int) (Math.random()*(34-1)) + 1;
         columna = (int) (Math.random()*(34-1)) + 1;
+        coord = new int[2];
+        coord[0] = fila;
+        coord[1] = columna;
+        coordmov = 0;
         generar();
     }
 
     private static void colorear(int i){
-        View.bMatriz[Factory.enemigos.get(i).fila][Factory.enemigos.get(i).columna].setBackground(Color.yellow);
+        View.bMatriz[Factory.enemigos.get(i).coord[0]][Factory.enemigos.get(i).coord[1]].setBackground(Color.yellow);
     }
 
     private static void actualizar(int i){
-        View.bMatriz[Factory.enemigos.get(i).fila][Factory.enemigos.get(i).columna].setBackground(Color.gray);
+        System.out.println(Factory.enemigos.get(i).coord[0] +" "+Factory.enemigos.get(i).coord[1]);
+        View.bMatriz[Factory.enemigos.get(i).coord[0]][Factory.enemigos.get(i).coord[1]].setBackground(Color.gray);
     }
 
     public void generar(){
         while(fila == 17 && columna == 17){
             fila = (int) (Math.random()*(34-1)) + 1;
             columna = (int) (Math.random()*(34-1)) + 1;
+            coord[0] = fila;
+            coord[1] = columna;
         }
-        View.bMatriz[fila][columna].setBackground(Color.yellow);
+        View.bMatriz[coord[0]][coord[1]].setBackground(Color.yellow);
         cantidadE++;
     }
 
@@ -38,43 +47,20 @@ public class Enemigo {
         return false;
     }
 
-    public static void mover(int filap, int columnap){
+    public static void mover(int[] coordp){
         for(int i = 0; i < cantidadE; i++){
-            actualizar(i);
-            if((columnap < Factory.enemigos.get(i).columna && filap < Factory.enemigos.get(i).fila) || (columnap > Factory.enemigos.get(i).columna && filap < Factory.enemigos.get(i).fila) || (columnap == Factory.enemigos.get(i).columna && filap < Factory.enemigos.get(i).fila))
-                arriba(i);
-            else if((columnap < Factory.enemigos.get(i).columna && filap > Factory.enemigos.get(i).fila) || (columnap > Factory.enemigos.get(i).columna && filap > Factory.enemigos.get(i).fila) || (columnap == Factory.enemigos.get(i).columna && filap > Factory.enemigos.get(i).fila))
-                abajo(i);
-            else if(columnap < Factory.enemigos.get(i).columna && filap == Factory.enemigos.get(i).fila)
-                izquierda(i);
-            else if(columnap > Factory.enemigos.get(i).columna && filap == Factory.enemigos.get(i).fila)
-                derecha(i);
+            if(coordp[coordmov] != Factory.enemigos.get(i).coord[coordmov]){
+                actualizar(i);
+                Factory.enemigos.get(i).coord[coordmov] += (coordp[coordmov] - Factory.enemigos.get(i).coord[coordmov])/Math.abs(coordp[coordmov] - Factory.enemigos.get(i).coord[coordmov]);
+                colorear(i);
+            }
         }
-    }
-
-    public static void arriba(int i){
-        Factory.enemigos.get(i).fila--;
-        colorear(i);
-    }
-
-    public static void abajo(int i){
-        Factory.enemigos.get(i).fila++;
-        colorear(i);
-    }
-
-    public static void izquierda(int i){
-        Factory.enemigos.get(i).columna--;
-        colorear(i);
-    }
-
-    public static void derecha(int i){
-        Factory.enemigos.get(i).columna++;
-        colorear(i);
+        coordmov = (coordmov + 1) % 2;
     }
 
     static void eliminar(int fila, int columna){
         for(int i = 0; i < cantidadE; i++){
-            if (Factory.enemigos.get(i).columna == columna && Factory.enemigos.get(i).fila == fila){
+            if (Factory.enemigos.get(i).coord[1] == columna && Factory.enemigos.get(i).coord[0] == fila){
                 Factory.enemigos.remove(i);
                 cantidadE--;
                 View.bMatriz[fila][columna].setBackground(Color.gray);
