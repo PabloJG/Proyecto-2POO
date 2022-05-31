@@ -5,13 +5,13 @@ public class Aliado {
     int fila;
     int columna;
 
-    public Aliado(int i){
+    public Aliado(){
         fila = (int) (Math.random()*(34-1)) + 1;
         columna = (int) (Math.random()*(34-1)) + 1;
-        pintar(i);
+        pintar();
     }
 
-    public void pintar(int i){
+    public void pintar(){
         while(fila == 17 && columna == 17){
             fila = (int) (Math.random()*(34-1)) + 1;
             columna = (int) (Math.random()*(34-1)) + 1;
