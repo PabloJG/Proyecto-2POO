@@ -12,6 +12,7 @@ public class Personaje{
     int Y;
     int vida;
     int cantmov;
+    int[] coord;
     String posicion;
 
     public Personaje(){
@@ -19,6 +20,9 @@ public class Personaje{
         Y = 17;
         Personaje = View.bMatriz[X][Y];
         vida = 5;
+        coord = new int[2];
+        coord[0] = X;
+        coord[1] = Y;
         colorear();
         move();
     }
@@ -45,36 +49,42 @@ public class Personaje{
                     Y++;
                     colorear();
                     posicion = "derecha";
-                    Enemigo.mover(X, Y);
+                    coord[1] = Y;
+                    Enemigo.mover(coord);
+                    cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     actualizar();
                     Y--;
                     colorear();
                     posicion = "izquierda";
-                    Enemigo.mover(X, Y);
+                    coord[1] = Y;
+                    Enemigo.mover(coord);
+                    cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_UP) {
                     actualizar();
                     X--;
                     colorear();
+                    coord[0] = X;
                     posicion = "arriba";
-                    Enemigo.mover(X, Y);
+                    Enemigo.mover(coord);
+                    cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     actualizar();
                     X++;
                     colorear();
+                    coord[0] = X;
                     posicion = "abajo";
-                    Enemigo.mover(X, Y);
+                    Enemigo.mover(coord);
+                    cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     disparo();
                 }
-                cantmov++;
                 if(Enemigo.agregarnuevo(cantmov) == true)
                     cantmov = 0;
-                
             }
   
             @Override
