@@ -1,5 +1,8 @@
 package View;
 import javax.swing.JButton;
+
+import Model.Factory;
+
 import java.awt.event.*;
 import java.awt.Color;
 
@@ -42,33 +45,36 @@ public class Personaje{
                     Y++;
                     colorear();
                     posicion = "derecha";
-                    Enemigo.cargarnuevo(X, Y);
+                    Enemigo.mover(X, Y);
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
                     actualizar();
                     Y--;
                     colorear();
                     posicion = "izquierda";
-                    Enemigo.cargarnuevo(X, Y);
+                    Enemigo.mover(X, Y);
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_UP) {
                     actualizar();
                     X--;
                     colorear();
                     posicion = "arriba";
-                    Enemigo.cargarnuevo(X, Y);
+                    Enemigo.mover(X, Y);
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
                     actualizar();
                     X++;
                     colorear();
                     posicion = "abajo";
-                    Enemigo.cargarnuevo(X, Y);
+                    Enemigo.mover(X, Y);
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     disparo();
                 }
                 cantmov++;
+                if(Enemigo.agregarnuevo(cantmov) == true)
+                    cantmov = 0;
+                
             }
   
             @Override
@@ -79,23 +85,21 @@ public class Personaje{
     }
 
     public void disparo(){
-        //System.out.println(posicion);
-        //System.out.println("X" + X + "Y" + Y);
         if(posicion.equals("arriba")){
             if (View.bMatriz[X-1][Y].getBackground() == Color.yellow)
-                View.bMatriz[X-1][Y].setBackground(Color.gray);
+                Enemigo.eliminar(X-1, Y);
         }
         if(posicion.equals("abajo")){
             if (View.bMatriz[X+1][Y].getBackground() == Color.yellow)
-                View.bMatriz[X+1][Y].setBackground(Color.gray);
+                Enemigo.eliminar(X+1, Y);
         }
         if(posicion.equals("izquierda")){
             if (View.bMatriz[X][Y-1].getBackground() == Color.yellow)
-                View.bMatriz[X][Y-1].setBackground(Color.gray);
+                Enemigo.eliminar(X, Y-1);
         }
         if(posicion.equals("derecha")){
             if (View.bMatriz[X][Y+1].getBackground() == Color.yellow)
-                View.bMatriz[X][Y+1].setBackground(Color.gray);
+                Enemigo.eliminar(X, Y+1);
         }
     }
 }
