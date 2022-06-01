@@ -39,7 +39,7 @@ public class Enemigo {
     }
 
     public static boolean agregarnuevo(int cant){
-        if(cant == 6){
+        if(cant == 9){
             Factory.enemigos.add(new Enemigo());
             return true;
         }
