@@ -86,6 +86,10 @@ public class Personaje{
                 if(Enemigo.agregarnuevo(cantmov) == true)
                     cantmov = 0;
                 actualizarVida();
+
+                if(Aliado.agregarnuevo(cantmov) == true)
+                cantmov = 0;
+                actualizarVida();
             }
   
             @Override
@@ -103,6 +107,9 @@ public class Personaje{
         else{
             if(Enemigo.vidaPersonaje(X, Y) == true)
                 JOptionPane.showMessageDialog(null, "Haz perdido una vida, te quedan " + vida + " vidas","Cuidado",JOptionPane.WARNING_MESSAGE);
+
+            if(Aliado.vidaPersonaje(X, Y) == true)
+                JOptionPane.showMessageDialog(null, "Haz ganado una vida, te quedan " + vida + " vidas","Sigue asi!",JOptionPane.WARNING_MESSAGE);    
         }
     }
 
