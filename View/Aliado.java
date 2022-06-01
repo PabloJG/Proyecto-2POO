@@ -16,30 +16,23 @@ public class Aliado {
         coord[0] = fila;
         coord[1] = columna;
         coordmov = 0;
-        pintar();
         generar();
     }
 
-    public void pintar(){
-        while(fila == 17 && columna == 17){
-            fila = (int) (Math.random()*(34-1)) + 1;
-            columna = (int) (Math.random()*(34-1)) + 1;
-        }
-        View.bMatriz[fila][columna].setBackground(Color.green);
-    }
-
     public void generar(){
-        while(fila == 17 && columna == 17){
-            fila = (int) (Math.random()*(34-1)) + 1;
-            columna = (int) (Math.random()*(34-1)) + 1;
-            coord[0] = fila;
-            coord[1] = columna;
+        if(cantidadA < 10){
+            while(fila == 17 && columna == 17){
+                fila = (int) (Math.random()*(34-1)) + 1;
+                columna = (int) (Math.random()*(34-1)) + 1;
+                coord[0] = fila;
+                coord[1] = columna;
+            }
+            View.bMatriz[coord[0]][coord[1]].setBackground(Color.green);
+            cantidadA++;
         }
-        View.bMatriz[coord[0]][coord[1]].setBackground(Color.green);
-        cantidadA++;
     }
     public static boolean agregarnuevo(int cant){
-        if(cant == 4){
+        if(cant == 9){
             Factory.aliados.add(new Aliado());
             return true;
         }
@@ -61,7 +54,8 @@ public class Aliado {
             if((Factory.aliados.get(i).coord[0] == fila) && (Factory.aliados.get(i).coord[1] == columna)){
                 eliminar(fila, columna);
                 View.bMatriz[fila][columna].setBackground(Color.red);
-                Personaje.vida++;
+                if(Personaje.vida < 5)
+                    Personaje.vida++;
                 return true;
             }
         }
