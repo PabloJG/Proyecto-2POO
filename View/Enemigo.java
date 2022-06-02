@@ -1,13 +1,15 @@
 package View;
 import Model.*;
+import Controller.Controller;
 import java.awt.Color;
 
 public class Enemigo {
+    Controller controlador;
     int fila;
     int columna;
-    static int cantidadE;
-    static int coordmov;
-    int[] coord;
+    public static int cantidadE;
+    public static int coordmov;
+    public int[] coord;
 
     public Enemigo(){
         fila = (int) (Math.random()*(34-1)) + 1;
@@ -19,11 +21,11 @@ public class Enemigo {
         generar();
     }
 
-    private static void colorear(int i){
+    public static void colorear(int i){
         View.bMatriz[Factory.enemigos.get(i).coord[0]][Factory.enemigos.get(i).coord[1]].setBackground(Color.yellow);
     }
 
-    private static void actualizar(int i){
+    public static void actualizar(int i){
         View.bMatriz[Factory.enemigos.get(i).coord[0]][Factory.enemigos.get(i).coord[1]].setBackground(Color.gray);
     }
 
@@ -38,44 +40,7 @@ public class Enemigo {
         cantidadE++;
     }
 
-    public static boolean agregarnuevo(int cant){
-        if(cant == 9){
-            Factory.enemigos.add(new Enemigo());
-            return true;
-        }
-        return false;
-    }
-
-    public static void mover(int[] coordp){
-        for(int i = 0; i < cantidadE; i++){
-            if(coordp[coordmov] != Factory.enemigos.get(i).coord[coordmov]){
-                actualizar(i);
-                Factory.enemigos.get(i).coord[coordmov] += (coordp[coordmov] - Factory.enemigos.get(i).coord[coordmov])/Math.abs(coordp[coordmov] - Factory.enemigos.get(i).coord[coordmov]);
-                colorear(i);
-            }
-        }
-        coordmov = (coordmov + 1) % 2;
-    }
-
-    static void eliminar(int fila, int columna){
-        for(int i = 0; i < cantidadE; i++){
-            if (Factory.enemigos.get(i).coord[1] == columna && Factory.enemigos.get(i).coord[0] == fila){
-                Factory.enemigos.remove(i);
-                cantidadE--;
-                View.bMatriz[fila][columna].setBackground(Color.gray);
-            }
-        }
-    }
-
-    public static boolean vidaPersonaje(int fila, int columna){
-        for(int i = 0; i < cantidadE; i++){
-            if((Factory.enemigos.get(i).coord[0] == fila) && (Factory.enemigos.get(i).coord[1] == columna)){
-                eliminar(fila, columna);
-                View.bMatriz[fila][columna].setBackground(Color.red);
-                Personaje.vida--;
-                return true;
-            }
-        }
-        return false;
+    public void setCoordinador(Controller controlador) {
+        this.controlador = controlador;
     }
 }
