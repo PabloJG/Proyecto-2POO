@@ -1,16 +1,17 @@
 package View;
 import javax.swing.*;
 
-import Model.Factory;
+import Controller.Controller;
 
 import java.awt.event.*;
 import java.awt.Color;
 
 public class Personaje{
+    Controller controlador;
     JButton Personaje;
     int X;
     int Y;
-    static int vida;
+    public static int vida;
     int cantmov;
     int[] coord;
     String posicion;
@@ -50,7 +51,7 @@ public class Personaje{
                     colorear();
                     posicion = "derecha";
                     coord[1] = Y;
-                    Enemigo.mover(coord);
+                    controlador.moverE(coord);
                     cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -59,7 +60,7 @@ public class Personaje{
                     colorear();
                     posicion = "izquierda";
                     coord[1] = Y;
-                    Enemigo.mover(coord);
+                    controlador.moverE(coord);
                     cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -68,7 +69,7 @@ public class Personaje{
                     colorear();
                     coord[0] = X;
                     posicion = "arriba";
-                    Enemigo.mover(coord);
+                    controlador.moverE(coord);
                     cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
@@ -77,14 +78,15 @@ public class Personaje{
                     colorear();
                     coord[0] = X;
                     posicion = "abajo";
-                    Enemigo.mover(coord);
+                    controlador.moverE(coord);
                     cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    disparo();
+                    controlador.disparo(X, Y, posicion);
                 }
-                if(Enemigo.agregarnuevo(cantmov) == true && Aliado.agregarnuevo(cantmov) == true)
+                if((controlador.agregarnuevoE(cantmov) == true) && (controlador.agregarnuevoA(cantmov) == true))
                     cantmov = 0;
+                Aliado.pintarTodos();
                 actualizarVida();
             }
   
@@ -101,30 +103,15 @@ public class Personaje{
             System.exit(0);
         }
         else{
-            if(Enemigo.vidaPersonaje(X, Y) == true)
+            if(controlador.restarVida(X, Y) == true)
                 JOptionPane.showMessageDialog(null, "Haz perdido una vida, te quedan " + vida + " vidas","Cuidado",JOptionPane.WARNING_MESSAGE);
 
-            if(Aliado.vidaPersonaje(X, Y) == true)
+            else if(controlador.sumarVida(X, Y) == true)
                 JOptionPane.showMessageDialog(null, "Haz ganado una vida, te quedan " + vida + " vidas","Sigue asi!",JOptionPane.INFORMATION_MESSAGE);    
         }
     }
 
-    public void disparo(){
-        if(posicion.equals("arriba")){
-            if (View.bMatriz[X-1][Y].getBackground() == Color.yellow)
-                Enemigo.eliminar(X-1, Y);
-        }
-        if(posicion.equals("abajo")){
-            if (View.bMatriz[X+1][Y].getBackground() == Color.yellow)
-                Enemigo.eliminar(X+1, Y);
-        }
-        if(posicion.equals("izquierda")){
-            if (View.bMatriz[X][Y-1].getBackground() == Color.yellow)
-                Enemigo.eliminar(X, Y-1);
-        }
-        if(posicion.equals("derecha")){
-            if (View.bMatriz[X][Y+1].getBackground() == Color.yellow)
-                Enemigo.eliminar(X, Y+1);
-        }
+    public void setCoordinador(Controller controlador) {
+        this.controlador = controlador;
     }
 }
