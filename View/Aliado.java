@@ -1,13 +1,16 @@
 package View;
-import Model.*;
+import Model.Factory;
 import java.awt.Color;
 
+import Controller.Controller;
+
 public class Aliado {
+    Controller controlador;
     int fila;
     int columna;
-    static int cantidadA;
-    static int coordmov;
-    int[] coord;
+    public static int cantidadA;
+    int coordmov;
+    public int[] coord;
 
     public Aliado(){
         fila = (int) (Math.random()*(34-1)) + 1;
@@ -20,6 +23,7 @@ public class Aliado {
     }
 
     public void generar(){
+        System.out.println(cantidadA);
         if(cantidadA < 10){
             while(fila == 17 && columna == 17){
                 fila = (int) (Math.random()*(34-1)) + 1;
@@ -31,36 +35,14 @@ public class Aliado {
             cantidadA++;
         }
     }
-    public static boolean agregarnuevo(int cant){
-        if(cant == 9){
-            Factory.aliados.add(new Aliado());
-            return true;
-        }
-        return false;
-    }
-    
-    static void eliminar(int fila, int columna){
+
+    public static void pintarTodos(){
         for(int i = 0; i < cantidadA; i++){
-            if (Factory.aliados.get(i).coord[1] == columna && Factory.aliados.get(i).coord[0] == fila){
-                Factory.aliados.remove(i);
-                cantidadA--;
-                View.bMatriz[fila][columna].setBackground(Color.gray);
-            }
+            View.bMatriz[Factory.aliados.get(i).coord[0]][Factory.aliados.get(i).coord[1]].setBackground(Color.green);
         }
     }
 
-    public static boolean vidaPersonaje(int fila, int columna){
-        for(int i = 0; i < cantidadA; i++){
-            if((Factory.aliados.get(i).coord[0] == fila) && (Factory.aliados.get(i).coord[1] == columna)){
-                eliminar(fila, columna);
-                View.bMatriz[fila][columna].setBackground(Color.red);
-                if(Personaje.vida < 5)
-                    Personaje.vida++;
-                return true;
-            }
-        }
-        return false;
+    public void setCoordinador(Controller controlador) {
+        this.controlador = controlador;
     }
-
-
 }
