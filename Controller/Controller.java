@@ -27,6 +27,20 @@ public class Controller {
 
     public void setFactory(Factory fact) {
         this.fact = fact;
+        crear("enemigo");
+        crear("aliado");
+    }
+
+    void crear(String tipo){
+        switch(tipo){
+            case "enemigo":
+                fact.iniciarenem();
+                
+            break;
+            case "aliado":
+                fact.iniciaralia();
+            break;
+        }
     }
 
     public void disparo(int X, int Y, String posicion){
