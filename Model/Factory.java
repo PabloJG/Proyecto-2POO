@@ -10,8 +10,7 @@ public class Factory{
     public static ArrayList<Aliado> aliados = new ArrayList<Aliado>();
 
     public Factory (){
-        iniciaralia();
-        iniciarenem();
+        
     }
 
     public void iniciaralia(){
