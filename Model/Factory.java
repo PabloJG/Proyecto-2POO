@@ -1,10 +1,11 @@
 package Model;
-import View.Aliado;
-import View.Enemigo;
-import java.util.ArrayList; 
+import View.*;
+import java.util.ArrayList;
+
+import Controller.Controller; 
 
 public class Factory{
-    //public static Enemigo[] enemigos;
+    Controller controlador;
     public static ArrayList<Enemigo> enemigos = new ArrayList<Enemigo>();
     public static ArrayList<Aliado> aliados = new ArrayList<Aliado>();
 
@@ -24,5 +25,24 @@ public class Factory{
             enemigos.add(new Enemigo());
         }
     }
+
+    public void setCoordinador(Controller controlador) {
+        this.controlador = controlador;
+    }
+
+    public static boolean agregarnuevoE(int cant){
+        if(cant == 9){
+            Factory.enemigos.add(new Enemigo());
+            return true;
+        }
+        return false;
+    }
         
+    public static boolean agregarnuevoA(int cant){
+        if(cant == 9){
+            Factory.aliados.add(new Aliado());
+            return true;
+        }
+        return false;
+    }
 }
