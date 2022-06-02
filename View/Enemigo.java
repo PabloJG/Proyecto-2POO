@@ -3,7 +3,7 @@ import Model.*;
 import Controller.Controller;
 import java.awt.Color;
 
-public class Enemigo {
+public class Enemigo implements TipoA{
     Controller controlador;
     int fila;
     int columna;
@@ -19,6 +19,11 @@ public class Enemigo {
         coord[1] = columna;
         coordmov = 0;
         generar();
+    }
+
+    @Override
+    public void tipo(){
+
     }
 
     public static void colorear(int i){
