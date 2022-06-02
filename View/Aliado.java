@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import Controller.Controller;
 
-public class Aliado {
+public class Aliado implements TipoA{
     Controller controlador;
     int fila;
     int columna;
@@ -20,6 +20,11 @@ public class Aliado {
         coord[1] = columna;
         coordmov = 0;
         generar();
+    }
+
+    @Override
+    public void tipo(){
+
     }
 
     public void generar(){
