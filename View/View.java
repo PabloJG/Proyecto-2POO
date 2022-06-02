@@ -2,10 +2,14 @@ package View;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import Controller.Controller;
+
 import java.awt.GridLayout;
 import java.awt.Color;
 
 public class View{
+    Controller controlador;
     private static JFrame ventana = new JFrame();
     public static JButton bMatriz[][] = new JButton[35][35];
     private static JPanel panel = new JPanel();
@@ -31,5 +35,9 @@ public class View{
             }
         }
         ventana.setVisible(true);
+    }
+
+    public void setCoordinador(Controller controlador) {
+        this.controlador = controlador;
     }
 }
