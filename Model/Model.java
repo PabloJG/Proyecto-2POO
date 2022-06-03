@@ -6,6 +6,7 @@ import View.*;
 public class Model {
     Controller controlador;
     Enemigo enemigo;
+    int[] coordp;
 
     public void setCoordinador(Controller controlador) {
         this.controlador = controlador;
@@ -77,14 +78,32 @@ public class Model {
         return false;
     }
 
-    public void moverE(int[] coordp){
+    public void getPosP(int[] coord){
+        coordp = coord;
+    }
+
+    public void moverE(){
         for(int i = 0; i < Enemigo.cantidadE; i++){
             if(coordp[Enemigo.coordmov] != Factory.enemigos.get(i).coord[Enemigo.coordmov]){
-                Enemigo.actualizar(i);
+                Enemigo.descolorear(i);
                 Factory.enemigos.get(i).coord[Enemigo.coordmov] += (coordp[Enemigo.coordmov] - Factory.enemigos.get(i).coord[Enemigo.coordmov])/Math.abs(coordp[Enemigo.coordmov] - Factory.enemigos.get(i).coord[Enemigo.coordmov]);
                 Enemigo.colorear(i);
             }
         }
         Enemigo.coordmov = (Enemigo.coordmov + 1) % 2;
+    }
+
+    public void aparecerA(){
+        for(int i = 0; i < Aliado.cantidadA; i++){
+            if(coordp[Aliado.coordmov] != Factory.aliados.get(i).coord[Aliado.coordmov]){
+                int prueba = (coordp[Aliado.coordmov] - Factory.aliados.get(i).coord[Aliado.coordmov]);
+                if(prueba >= -1)
+                    Aliado.colorear(i);
+                    
+                System.out.println(prueba);
+                //Enemigo.colorear(i);
+            }
+        }
+        //Aliado.coordmov = (Aliado.coordmov + 1) % 2;
     }
 }
