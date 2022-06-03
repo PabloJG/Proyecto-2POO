@@ -1,7 +1,6 @@
 package View;
 import javax.swing.*;
 import Controller.Controller;
-import Model.*;
 import java.awt.event.*;
 import java.awt.Color;
 import java.util.Observer;
@@ -9,14 +8,14 @@ import java.util.Observable;
 
 public class Personaje extends Observable{
     private Observer observer;
-    Controller controlador;
-    JButton Personaje;
-    int X;
-    int Y;
+    private Controller controlador;
+    private JButton Personaje;
+    private int X;
+    private int Y;
     public static int vida;
-    int cantmov;
+    private int cantmov;
     public int[] coord;
-    String posicion;
+    private String posicion;
 
     public Personaje(){
         X = 17;
@@ -38,6 +37,7 @@ public class Personaje extends Observable{
     @Override
     public void notifyObservers(){
         if(observer != null){
+            System.out.println("aqui perimero");
             observer.update(this, "enemigo");
         }
     }
@@ -65,6 +65,8 @@ public class Personaje extends Observable{
                     colorear();
                     posicion = "derecha";
                     coord[1] = Y;
+                    controlador.getPosP(coord);
+                    notifyObservers();
                     //controlador.moverE(coord);
                     cantmov++;
                 }
@@ -74,6 +76,8 @@ public class Personaje extends Observable{
                     colorear();
                     posicion = "izquierda";
                     coord[1] = Y;
+                    controlador.getPosP(coord);
+                    notifyObservers();
                     //controlador.moverE(coord);
                     cantmov++;
                 }
@@ -83,6 +87,8 @@ public class Personaje extends Observable{
                     colorear();
                     coord[0] = X;
                     posicion = "arriba";
+                    controlador.getPosP(coord);
+                    notifyObservers();
                     //controlador.moverE(coord);
                     cantmov++;
                 }
@@ -92,7 +98,8 @@ public class Personaje extends Observable{
                     colorear();
                     coord[0] = X;
                     posicion = "abajo";
-                    //controlador.moverE(coord);
+                    controlador.getPosP(coord);
+                    notifyObservers();
                     cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -100,9 +107,9 @@ public class Personaje extends Observable{
                 }
                 if((controlador.agregarnuevoE(cantmov) == true) && (controlador.agregarnuevoA(cantmov) == true))
                     cantmov = 0;
-                controlador.getPosP(coord);
+                //controlador.getPosP(coord);
                 //controlador.moverE();
-                notifyObservers();
+                //notifyObservers();
                 controlador.aparecerA();
                 //Aliado.pintarTodos();
                 actualizarVida();
