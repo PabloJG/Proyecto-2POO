@@ -6,10 +6,10 @@ import java.util.Observer;
 import java.util.Observable;
 
 public class Enemigo implements Observer{
-    Personaje personaje;
-    Enemigo prueba;
-    int fila;
-    int columna;
+    private Personaje personaje;
+    private Enemigo prueba;
+    private int fila;
+    private int columna;
     public static int cantidadE;
     public static int coordmov;
     public int[] coord;
@@ -27,6 +27,7 @@ public class Enemigo implements Observer{
 
     @Override
     public void update(Observable o, Object ag){
+        System.out.println("prueba");
         Controller.moverE();  
     }
 
