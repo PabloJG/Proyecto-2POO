@@ -1,25 +1,10 @@
 package Controller;
-import java.util.ArrayList;
 
 import Model.*;
-import View.*;
 
 public class Controller {
-    private View matriz;
-    Enemigo enemigo;
-    Aliado aliado;
-    Personaje pers;
-    static Model modelo;
-    Factory fact;
-    ArrayList<Enemigo> enemigos;
-
-    public void setMatriz(View matriz) {
-        this.matriz = matriz; 
-    }
-
-    public void setPersonaje(Personaje pers) {
-        this.pers = pers;
-    }
+    private static Model modelo;
+    private Factory fact;
 
     public void setModelo(Model modelo) {
         this.modelo = modelo;
@@ -31,7 +16,7 @@ public class Controller {
         crear("aliado");
     }
 
-    void crear(String tipo){
+    private void crear(String tipo){
         switch(tipo){
             case "enemigo":
                 fact.iniciarenem();
@@ -59,7 +44,7 @@ public class Controller {
         modelo.eliminarE(x, i);
     }
 
-    void eliminarA(int fila, int columna){
+    public void eliminarA(int fila, int columna){
         modelo.eliminarA(fila, columna);
     }
 
