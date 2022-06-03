@@ -10,13 +10,9 @@ public class Main {
         Personaje pers = new Personaje();
         Factory fact = new Factory(pers);
 
-        matriz.setCoordinador(controlador);
         pers.setCoordinador(controlador);
         modelo.setCoordinador(controlador);
-        fact.setCoordinador(controlador);
 
-        controlador.setMatriz(matriz);
-        controlador.setPersonaje(pers);
         controlador.setModelo(modelo);
         controlador.setFactory(fact);
 
