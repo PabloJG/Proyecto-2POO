@@ -4,9 +4,8 @@ import java.awt.Color;
 import View.*;
 
 public class Model {
-    Controller controlador;
-    Enemigo enemigo;
-    int[] coordp;
+    private Controller controlador;
+    private int[] coordp;
 
     public void setCoordinador(Controller controlador) {
         this.controlador = controlador;
@@ -16,24 +15,24 @@ public class Model {
         switch(posicion){
             case "arriba":
                 if (View.bMatriz[X-1][Y].getBackground() == Color.yellow)
-                    eliminarE(X-1, Y);
+                    controlador.eliminarE(X-1, Y);
                 break;
             case "abajo":
                 if (View.bMatriz[X+1][Y].getBackground() == Color.yellow)
-                    eliminarE(X+1, Y);
+                    controlador.eliminarE(X+1, Y);
                 break;
             case "izquierda":
                 if (View.bMatriz[X][Y-1].getBackground() == Color.yellow)
-                    eliminarE(X, Y-1);
+                    controlador.eliminarE(X, Y-1);
                 break;
             case "derecha":
                 if (View.bMatriz[X][Y+1].getBackground() == Color.yellow)
-                    eliminarE(X, Y+1);
+                    controlador.eliminarE(X, Y+1);
                 break;
         }
     }
 
-    public static void eliminarE(int fila, int columna){
+    public void eliminarE(int fila, int columna){
         for(int i = 0; i < Enemigo.cantidadE; i++){
             if (Factory.enemigos.get(i).coord[1] == columna && Factory.enemigos.get(i).coord[0] == fila){
                 Factory.enemigos.remove(i);
@@ -43,7 +42,7 @@ public class Model {
         }
     }
 
-    public static void eliminarA(int fila, int columna){
+    public void eliminarA(int fila, int columna){
         for(int i = 0; i < Aliado.cantidadA; i++){
             if (Factory.aliados.get(i).coord[1] == columna && Factory.aliados.get(i).coord[0] == fila){
                 Factory.aliados.remove(i);
@@ -56,7 +55,7 @@ public class Model {
     public boolean sumarVida(int fila, int columna){
         for(int i = 0; i < Aliado.cantidadA; i++){
             if((Factory.aliados.get(i).coord[0] == fila) && (Factory.aliados.get(i).coord[1] == columna)){
-                eliminarA(fila, columna);
+                controlador.eliminarA(fila, columna);
                 View.bMatriz[fila][columna].setBackground(Color.red);
                 if(Personaje.vida < 5)
                     Personaje.vida++;
@@ -69,7 +68,7 @@ public class Model {
     public boolean restarVida(int fila, int columna){
         for(int i = 0; i < Enemigo.cantidadE; i++){
             if((Factory.enemigos.get(i).coord[0] == fila) && (Factory.enemigos.get(i).coord[1] == columna)){
-                eliminarE(fila, columna);
+                controlador.eliminarE(fila, columna);
                 View.bMatriz[fila][columna].setBackground(Color.red);
                 Personaje.vida--;
                 return true;
@@ -83,6 +82,7 @@ public class Model {
     }
 
     public void moverE(){
+        System.out.println("jola");
         for(int i = 0; i < Enemigo.cantidadE; i++){
             if(coordp[Enemigo.coordmov] != Factory.enemigos.get(i).coord[Enemigo.coordmov]){
                 Enemigo.descolorear(i);
