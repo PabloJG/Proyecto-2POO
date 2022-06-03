@@ -1,19 +1,21 @@
 package View;
 import javax.swing.*;
-
 import Controller.Controller;
-
+import Model.*;
 import java.awt.event.*;
 import java.awt.Color;
+import java.util.Observer;
+import java.util.Observable;
 
-public class Personaje{
+public class Personaje extends Observable{
+    private Observer observer;
     Controller controlador;
     JButton Personaje;
     int X;
     int Y;
     public static int vida;
     int cantmov;
-    int[] coord;
+    public int[] coord;
     String posicion;
 
     public Personaje(){
@@ -28,12 +30,24 @@ public class Personaje{
         move();
     }
 
+    @Override
+    public void addObserver(Observer observer){
+        this.observer = observer;
+    }
+
+    @Override
+    public void notifyObservers(){
+        if(observer != null){
+            observer.update(this, "enemigo");
+        }
+    }
+
     private void colorear(){
         Personaje = View.bMatriz[X][Y];
         Personaje.setBackground(Color.red);
     }
 
-    private void actualizar(){
+    private void descolorear(){
         Personaje.setBackground(Color.gray);
     }
 
@@ -46,39 +60,39 @@ public class Personaje{
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-                    actualizar();
+                    descolorear();
                     Y++;
                     colorear();
                     posicion = "derecha";
                     coord[1] = Y;
-                    controlador.moverE(coord);
+                    //controlador.moverE(coord);
                     cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-                    actualizar();
+                    descolorear();
                     Y--;
                     colorear();
                     posicion = "izquierda";
                     coord[1] = Y;
-                    controlador.moverE(coord);
+                    //controlador.moverE(coord);
                     cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_UP) {
-                    actualizar();
+                    descolorear();
                     X--;
                     colorear();
                     coord[0] = X;
                     posicion = "arriba";
-                    controlador.moverE(coord);
+                    //controlador.moverE(coord);
                     cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-                    actualizar();
+                    descolorear();
                     X++;
                     colorear();
                     coord[0] = X;
                     posicion = "abajo";
-                    controlador.moverE(coord);
+                    //controlador.moverE(coord);
                     cantmov++;
                 }
                 else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -86,7 +100,11 @@ public class Personaje{
                 }
                 if((controlador.agregarnuevoE(cantmov) == true) && (controlador.agregarnuevoA(cantmov) == true))
                     cantmov = 0;
-                Aliado.pintarTodos();
+                controlador.getPosP(coord);
+                //controlador.moverE();
+                notifyObservers();
+                controlador.aparecerA();
+                //Aliado.pintarTodos();
                 actualizarVida();
             }
   
