@@ -2,11 +2,8 @@ package Model;
 import View.*;
 import java.util.ArrayList;
 
-import Controller.Controller; 
-
 public class Factory{
-    Controller controlador;
-    Personaje personaje;
+    private Personaje personaje;
     public static ArrayList<Enemigo> enemigos = new ArrayList<Enemigo>();
     public static ArrayList<Aliado> aliados = new ArrayList<Aliado>();  
 
@@ -40,9 +37,6 @@ public class Factory{
         Enemigo.agregarObservers(personaje);
     }
 
-    public void setCoordinador(Controller controlador) {
-        this.controlador = controlador;
-    }
 
     public boolean agregarE(int cant){
         if(cant == 9){
