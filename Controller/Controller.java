@@ -9,7 +9,7 @@ public class Controller {
     Enemigo enemigo;
     Aliado aliado;
     Personaje pers;
-    Model modelo;
+    static Model modelo;
     Factory fact;
     ArrayList<Enemigo> enemigos;
 
@@ -48,11 +48,11 @@ public class Controller {
     }
 
     public boolean agregarnuevoE(int cant){
-        return fact.agregarnuevoE(cant);
+        return fact.agregarE(cant);
     }
 
     public boolean agregarnuevoA(int cant){
-        return fact.agregarnuevoA(cant);
+        return fact.agregarA(cant);
     }
 
     public void eliminarE(int x, int i) {
@@ -71,7 +71,15 @@ public class Controller {
         return modelo.restarVida(fila, columna);
     }
 
-    public void moverE(int[] coordp){
-        modelo.moverE(coordp);
+    public static void moverE(){
+        modelo.moverE();
+    }
+
+    public void getPosP(int[] coord){
+        modelo.getPosP(coord);
+    }
+
+    public void aparecerA(){
+        modelo.aparecerA();
     }
 }
