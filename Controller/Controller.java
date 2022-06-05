@@ -64,7 +64,7 @@ public class Controller {
         modelo.getPosP(coord);
     }
 
-    public void aparecerA(){
+    public static void aparecerA(){
         modelo.aparecerA();
     }
 }
