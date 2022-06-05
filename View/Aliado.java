@@ -3,8 +3,9 @@ import java.awt.Color;
 import java.util.Observable;
 import java.util.Observer;
 import Model.Factory;
+import Controller.Controller;
 
-public class Aliado implements Observer{
+public class Aliado{
     private Personaje personaje;
     private int fila;
     private int columna;
@@ -23,15 +24,10 @@ public class Aliado implements Observer{
         generar();
     }
 
-    @Override
-    public void update(Observable o, Object ag){
-        System.out.println("entra aqui");
-    }
-
-    public static void agregarObservers(Personaje pers){
+    /*public static void agregarObservers(Personaje pers){
         for(int i = 0; i < cantidadA; i++)
             pers.addObserver(Factory.aliados.get(i));
-    }
+    }*/
 
     public static void colorear(int i){
         View.bMatriz[Factory.aliados.get(i).fila][Factory.aliados.get(i).columna].setBackground(Color.green);
@@ -45,7 +41,6 @@ public class Aliado implements Observer{
                 coord[0] = fila;
                 coord[1] = columna;
             }
-            System.out.println(coord[0] + " "+ coord[1]);
             //View.bMatriz[coord[0]][coord[1]].setBackground(Color.green);
             cantidadA++;
         }
