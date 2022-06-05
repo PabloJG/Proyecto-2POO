@@ -13,7 +13,7 @@ public class Factory{
 
     void nuevoA(){
         aliados.add(new Aliado(personaje));
-        Aliado.agregarObservers(personaje);
+        //Aliado.agregarObservers(personaje);
     }
 
     void nuevoE(){
