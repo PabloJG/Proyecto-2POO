@@ -37,7 +37,6 @@ public class Personaje extends Observable{
     @Override
     public void notifyObservers(){
         if(observer != null){
-            System.out.println("aqui perimero");
             observer.update(this, "enemigo");
         }
     }
@@ -107,10 +106,11 @@ public class Personaje extends Observable{
                 }
                 if((controlador.agregarnuevoE(cantmov) == true) && (controlador.agregarnuevoA(cantmov) == true))
                     cantmov = 0;
+                controlador.getPosP(coord);
+                Controller.aparecerA();
                 //controlador.getPosP(coord);
                 //controlador.moverE();
                 //notifyObservers();
-                controlador.aparecerA();
                 //Aliado.pintarTodos();
                 actualizarVida();
             }
