@@ -82,7 +82,6 @@ public class Model {
     }
 
     public void moverE(){
-        System.out.println("jola");
         for(int i = 0; i < Enemigo.cantidadE; i++){
             if(coordp[Enemigo.coordmov] != Factory.enemigos.get(i).coord[Enemigo.coordmov]){
                 Enemigo.descolorear(i);
@@ -97,10 +96,8 @@ public class Model {
         for(int i = 0; i < Aliado.cantidadA; i++){
             if(coordp[Aliado.coordmov] != Factory.aliados.get(i).coord[Aliado.coordmov]){
                 int prueba = (coordp[Aliado.coordmov] - Factory.aliados.get(i).coord[Aliado.coordmov]);
-                if(prueba >= -1)
+                if(prueba >= -1 && prueba <= 3)
                     Aliado.colorear(i);
-                    
-                System.out.println(prueba);
                 //Enemigo.colorear(i);
             }
         }
