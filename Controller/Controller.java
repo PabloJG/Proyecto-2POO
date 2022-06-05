@@ -27,7 +27,7 @@ public class Controller {
             break;
         }
     }
-
+//Diferentes metodos que tienen ya sea aliado o enemigo
     public void disparo(int X, int Y, String posicion){
         modelo.disparo(X, Y, posicion);
     }

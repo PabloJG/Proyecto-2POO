@@ -6,7 +6,7 @@ import java.awt.Color;
 import java.util.Observer;
 import java.util.Observable;
 
-public class Personaje extends Observable{
+public class Personaje extends Observable{ //clase donde se importa
     private Observer observer;
     private Controller controlador;
     private JButton Personaje;
@@ -35,7 +35,7 @@ public class Personaje extends Observable{
     }
 
     @Override
-    public void notifyObservers(){
+    public void notifyObservers(){// hace que aliado y enemigo vean lo que esta haciendo Personaje
         if(observer != null){
             observer.update(this, "enemigo");
         }
@@ -51,7 +51,7 @@ public class Personaje extends Observable{
     }
 
     private void move(){
-        Personaje.addKeyListener(new KeyListener(){
+        Personaje.addKeyListener(new KeyListener(){// se usa para que las teclas funcionen en el  juego
             @Override
             public void keyTyped(KeyEvent e) {
             }
@@ -122,7 +122,7 @@ public class Personaje extends Observable{
         });
     }
 
-    public void actualizarVida(){
+    public void actualizarVida(){// dependiendo de si ganó o perdió vida, este mandará un mensaje informando sobre lo que ocurrió
         if(vida == 0){
             JOptionPane.showMessageDialog(null, "Haz perdido, no tienes mas vidas","Fin",JOptionPane.INFORMATION_MESSAGE);
             System.exit(0);

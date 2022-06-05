@@ -2,7 +2,7 @@ import View.*;
 import Model.*;
 import Controller.*;
 
-public class Main {
+public class Main { //Aquí donde se da inicio al juego
     public static void main(String[] args) throws Exception {
         Controller controlador = new Controller();
         View matriz = new View();

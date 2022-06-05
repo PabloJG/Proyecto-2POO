@@ -30,7 +30,7 @@ public class Enemigo implements Observer{
         Controller.moverE();
     }
 
-    public static void agregarObservers(Personaje pers){
+    public static void agregarObservers(Personaje pers){// hace que enemigo sea capaz de observar Personaje
         for(int i = 0; i < cantidadE; i++)
             pers.addObserver(Factory.enemigos.get(i));
     }
@@ -43,7 +43,7 @@ public class Enemigo implements Observer{
         View.bMatriz[Factory.enemigos.get(i).coord[0]][Factory.enemigos.get(i).coord[1]].setBackground(Color.gray);
     }
 
-    public void generar(){
+    public void generar(){//genera enemigos despues de cierta cantidad de turnos
         while(fila == 17 && columna == 17){
             fila = (int) (Math.random()*(34-1)) + 1;
             columna = (int) (Math.random()*(34-1)) + 1;
