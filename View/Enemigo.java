@@ -27,8 +27,7 @@ public class Enemigo implements Observer{
 
     @Override
     public void update(Observable o, Object ag){
-        System.out.println("prueba");
-        Controller.moverE();  
+        Controller.moverE();
     }
 
     public static void agregarObservers(Personaje pers){
