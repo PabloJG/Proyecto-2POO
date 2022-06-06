@@ -31,7 +31,7 @@ public class Model {
                 break;
         }
     }
-
+//Si aliado o enemigo estan en la misma casilla de la matriz, puede pasar cualquier funcion de las que se muestran dependiendo si es aliado o enemigo
     public void eliminarE(int fila, int columna){
         for(int i = 0; i < Enemigo.cantidadE; i++){
             if (Factory.enemigos.get(i).coord[1] == columna && Factory.enemigos.get(i).coord[0] == fila){

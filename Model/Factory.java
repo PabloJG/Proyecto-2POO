@@ -2,7 +2,7 @@ package Model;
 import View.*;
 import java.util.ArrayList;
 
-public class Factory{
+public class Factory{//creacion de todos los  objetos de aliado y enemigo
     private Personaje personaje;
     public static ArrayList<Enemigo> enemigos = new ArrayList<Enemigo>();
     public static ArrayList<Aliado> aliados = new ArrayList<Aliado>();  
